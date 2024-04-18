@@ -7,19 +7,27 @@ editor: visual
 
 ## Team Members
 
-Write names of team members here.
+Lasya Muthyam, Sriya Peddinti
 
 ## Research Question
 
-Write research question here.
+Effects of Plastic Bag Regulations on the Chesapeake Bay
 
 ## Background
 
-Write research relevance and literature review here.
+Plastic bag bans have been implemented all around the Chesapeake Bay area in the past decade. Harford County in Maryland implemented a plastic bag ban in September 2017. Arlington and Fairfax counties in Virginia implemented a plastic bag tax in January 2022.
+
+Seeley et al. (2020) and Shen et al. (2020) discussed how microplastics can impact ocean carbon sequestration and dissolved organic carbon levels.
+
+Our research attempts to see what effects, if any, plastic bag bans and taxes have on dissolved carbon levels in the Chesapeake Bay.
 
 ## Data
 
-Explain data source here.
+The list of counties with plastic bag bans and taxes came from banthebag.com.
+
+The list of counties and states came from the Chesapeake Bay Foundation website, which listed the counties that are considered to be a part of the Chesapeake Bay watershed.
+
+Water quality data came from the EPA US Water Quality Portal. We looked at the dissolved carbon levels in a date range from 1-1-2010 to 3-1-2024 in the states/regions of New York, Pennsylvania, Maryland, Delaware, DC, Virginia, and West Virginia.
 
 Clean data here.
 
@@ -29,7 +37,9 @@ Clean data here.
 
 ## Preliminary Results
 
-Use your final dataset to visualize how the treatment variable impacts the outcome variable here.
+Use your final dataset to visualize how the treatment variable impacts the outcome variable here:
+
+The effects of the plastic bag ban on microplastic pollution in the Chesapeake Bay are unclear from our current results. We cannot conclude that the treatment variable, ban/tax, makes a significant impact on the outcome variable, average dissolved carbon levels.
 
 ```{r}
 
