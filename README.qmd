@@ -11,7 +11,7 @@ Lasya Muthyam, Sriya Peddinti
 
 ## Research Question
 
-Effects of Plastic Bag Regulations on the Chesapeake Bay
+What are the effects of the plastic bag ban and tax on water quality in the Chesapeake Bay?
 
 ## Background
 
@@ -53,16 +53,16 @@ pa_station <- read.csv("Site Data/pa_station.csv")
 ny_station <- read.csv("Site Data/ny_station.csv")
 md_station <- read.csv("Site Data/md_station.csv")
 de_station <- read.csv("Site Data/de_station.csv")
-dc_station <- read.csv("Site Data/dc_station.csv")
-
-# Nitrogen data
+dc_station <- read.csv("Site Data/dc_station# Nitrogen data
 dc_n <- read_csv("US_WQ_Data/DC_nitro.zip")
 de_n <- read_csv("US_WQ_Data/DE_nitro.zip")
 md_n <- read_csv("US_WQ_Data/MD_nitro.zip")
 ny_n <- read_csv("US_WQ_Data/NY_nitro.zip")
 pa_n <- read_csv("US_WQ_Data/PA_nitro.zip")
 va_n <- read_csv("US_WQ_Data/VA_nitro.zip")
-wv_n <- read_csv("US_WQ_Data/WV_nitro.zip")
+wv_n <- read_csv("US_WQ_Data/WV_nitro.zip").
+csv")
+
 
 ############################## Cleaning Carbon Data ###############################
 
@@ -202,43 +202,18 @@ names(df_county)[names(df_county) == 'state.x'] <- 'state'
 # Final carbon data frame
 df_final_carbon <- df_final3
 df_final_carbon$month <- sprintf("%02d", df_final_carbon$month) 
-df_final_carbon$date <- as.Date(with(df_final_carbon, paste(df_final_carbon$year, df_final_carbon$month, "01", sep = "-")), "%Y-%m-%d")
+df_final_carbon$date <- as.Date(with(df_final_carbon, paste(df_final_carbon$year, df_final_carbon$month, "01", sep = "-")), "%Y-
+%m-%d")
 
-
-############################## Cleaning Nitrogen Data #############################
-df_f_n <- rbind(dc_n, de_n, md_n, ny_n, pa_n, va_n, wv_n)
-df_final_n = select(df_f_n, 6, 7, 24, 25, 30, 31, 40:43, 45)
-
-df_final_nitrogen <- df_final_n |>
-  filter(CharacteristicName == 'Nitrogen-15/14 ratio')
-
-df_final_nitrogen <- merge(df_final_nitrogen, all_sites, by = "MonitoringLocationIdentifier")
-
-# Convert StateCode to character and pad CountyCode with leading zeros
-df_final_nitrogen$StateCode <- as.character(df_final_nitrogen$StateCode)
-df_final_nitrogen$CountyCode <- sprintf("%03d", as.numeric(df_final_nitrogen$CountyCode))
-
-# Combine StateCode and padded CountyCode into a new column (FIPS)
-df_final_nitrogen$fips <- paste0(df_final_nitrogen$StateCode, df_final_nitrogen$CountyCode)
-df_final_nitrogen$fips <- as.integer(df_final_nitrogen$fips)
-
-# Merging and cleaning
-df_final_nitrogen <- merge(df_final_nitrogen, fips_codes, by = "fips")
-df_final_nitrogen <- merge(df_final_nitrogen, ban_tax, by = "fips")
-
-# Renaming the columns to look better
-names(df_final_nitrogen)[names(df_final_nitrogen) == 'name.x'] <- 'name'
-names(df_final_nitrogen)[names(df_final_nitrogen) == 'state.x'] <- 'state'
-
-# Final dataframe for Nitrogen: df_final_nitrogen
-df_final_nitrogen$date <- as.Date(df_final_nitrogen$ActivityStartDate, format = "%Y-%m-%d")
 ```
 
 ## Preliminary Results
 
 Use your final dataset to visualize how the treatment variable impacts the outcome variable here:
 
-The effects of the plastic bag ban on microplastic pollution in the Chesapeake Bay are unclear from our current results. We cannot conclude that the treatment variable, ban/tax, makes a significant impact on the outcome variable, average dissolved carbon levels. Given more time to collect data and more regions to observe, we might be able to make a proper conclusion.
+We found that Harford County is the only county in Maryland that implemented a Bag Ban before 2024 that had sufficient dissolved carbon data. We also found that Arlington County in Virginia is the only county in Virginia that had a tax implemented before 2024 and had sufficient dissolved carbon data.
+
+The effects of the plastic bag ban on microplastic pollution in the Chesapeake Bay are unclear from our current results. We cannot conclude that the treatment variable, ban/tax, makes a significant impact on the outcome variable, average dissolved carbon levels. This is due to a lack of available data on counties that have implemented the ban or tax for long periods of time. We hope to look into a number of external factors in the future including stormwater runoff and precipitation data that could play a role in the levels of dissolved carbon.
 
 These graphs are our results:
 
