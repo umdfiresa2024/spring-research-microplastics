@@ -42,177 +42,19 @@ Clean data here.
 
 ``` r
 library('tidyverse')
-```
-
-    Warning: package 'tidyverse' was built under R version 4.3.3
-
-    Warning: package 'dplyr' was built under R version 4.3.3
-
-    ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-    ✔ dplyr     1.1.4     ✔ readr     2.1.4
-    ✔ forcats   1.0.0     ✔ stringr   1.5.0
-    ✔ ggplot2   3.4.3     ✔ tibble    3.2.1
-    ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-    ✔ purrr     1.0.2     
-    ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-    ✖ dplyr::filter() masks stats::filter()
-    ✖ dplyr::lag()    masks stats::lag()
-    ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
-
-``` r
 library('dplyr')
 library(readr)
 
 #One dataframe for each state/region we are looking at
 wv <- read_csv("US_WQ_Data/WV_data.zip")
-```
-
-    Warning: One or more parsing issues, call `problems()` on your data frame for details,
-    e.g.:
-      dat <- vroom(...)
-      problems(dat)
-
-    Rows: 11981 Columns: 81
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: ","
-    chr  (51): OrganizationIdentifier, OrganizationFormalName, ActivityIdentifie...
-    dbl   (6): ActivityDepthHeightMeasure/MeasureValue, ActivityTopDepthHeightMe...
-    lgl  (20): ActivityEndDate, ActivityEndTime/Time, SampleAquifer, Statistical...
-    dttm  (1): LastUpdated
-    date  (2): ActivityStartDate, AnalysisStartDate
-    time  (1): ActivityStartTime/Time
-
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-``` r
 va <- read_csv("US_WQ_Data/VA_data.zip")
-```
-
-    Warning: One or more parsing issues, call `problems()` on your data frame for details,
-    e.g.:
-      dat <- vroom(...)
-      problems(dat)
-
-    Rows: 115943 Columns: 81
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: ","
-    chr  (55): OrganizationIdentifier, OrganizationFormalName, ActivityIdentifie...
-    dbl   (6): ActivityDepthHeightMeasure/MeasureValue, ActivityBottomDepthHeigh...
-    lgl  (14): StatisticalBaseCode, ResultWeightBasisText, ResultTimeBasisText, ...
-    dttm  (1): LastUpdated
-    date  (3): ActivityStartDate, ActivityEndDate, AnalysisStartDate
-    time  (2): ActivityStartTime/Time, ActivityEndTime/Time
-
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-``` r
 pa <- read_csv("US_WQ_Data/PA_data.zip")
-```
-
-    Warning: One or more parsing issues, call `problems()` on your data frame for details,
-    e.g.:
-      dat <- vroom(...)
-      problems(dat)
-
-    Rows: 154125 Columns: 81
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: ","
-    chr  (49): OrganizationIdentifier, OrganizationFormalName, ActivityIdentifie...
-    dbl   (7): ActivityDepthHeightMeasure/MeasureValue, ActivityTopDepthHeightMe...
-    lgl  (19): ActivityDepthAltitudeReferencePointText, StatisticalBaseCode, Res...
-    dttm  (1): LastUpdated
-    date  (3): ActivityStartDate, ActivityEndDate, AnalysisStartDate
-    time  (2): ActivityStartTime/Time, ActivityEndTime/Time
-
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-``` r
 ny <- read_csv("US_WQ_Data/NY_data.zip")
-```
-
-    Warning: One or more parsing issues, call `problems()` on your data frame for details,
-    e.g.:
-      dat <- vroom(...)
-      problems(dat)
-
-    Rows: 38372 Columns: 81
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: ","
-    chr  (50): OrganizationIdentifier, OrganizationFormalName, ActivityIdentifie...
-    dbl   (7): ActivityDepthHeightMeasure/MeasureValue, ActivityTopDepthHeightMe...
-    lgl  (18): StatisticalBaseCode, ResultTimeBasisText, ResultTemperatureBasisT...
-    dttm  (1): LastUpdated
-    date  (3): ActivityStartDate, ActivityEndDate, AnalysisStartDate
-    time  (2): ActivityStartTime/Time, ActivityEndTime/Time
-
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-``` r
 md <- read_csv("US_WQ_Data/MD_data.zip")
-```
-
-    Warning: One or more parsing issues, call `problems()` on your data frame for details,
-    e.g.:
-      dat <- vroom(...)
-      problems(dat)
-
-    Rows: 47074 Columns: 81
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: ","
-    chr  (56): OrganizationIdentifier, OrganizationFormalName, ActivityIdentifie...
-    dbl   (5): ActivityDepthHeightMeasure/MeasureValue, ActivityBottomDepthHeigh...
-    lgl  (14): MeasureQualifierCode, ResultTimeBasisText, ResultTemperatureBasis...
-    dttm  (1): LastUpdated
-    date  (3): ActivityStartDate, ActivityEndDate, AnalysisStartDate
-    time  (2): ActivityStartTime/Time, ActivityEndTime/Time
-
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-``` r
 de <- read_csv("US_WQ_Data/DE_data.zip")
-```
-
-    Warning: One or more parsing issues, call `problems()` on your data frame for details,
-    e.g.:
-      dat <- vroom(...)
-      problems(dat)
-
-    Rows: 47074 Columns: 81
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: ","
-    chr  (56): OrganizationIdentifier, OrganizationFormalName, ActivityIdentifie...
-    dbl   (5): ActivityDepthHeightMeasure/MeasureValue, ActivityBottomDepthHeigh...
-    lgl  (14): MeasureQualifierCode, ResultTimeBasisText, ResultTemperatureBasis...
-    dttm  (1): LastUpdated
-    date  (3): ActivityStartDate, ActivityEndDate, AnalysisStartDate
-    time  (2): ActivityStartTime/Time, ActivityEndTime/Time
-
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-``` r
 dc <- read_csv("US_WQ_Data/DC_data.zip")
-```
 
-    Rows: 4389 Columns: 81
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: ","
-    chr  (45): OrganizationIdentifier, OrganizationFormalName, ActivityIdentifie...
-    dbl   (5): ActivityDepthHeightMeasure/MeasureValue, ActivityLocation/Latitud...
-    lgl  (25): ActivityRelativeDepthName, ActivityDepthAltitudeReferencePointTex...
-    dttm  (1): LastUpdated
-    date  (3): ActivityStartDate, ActivityEndDate, AnalysisStartDate
-    time  (2): ActivityStartTime/Time, ActivityEndTime/Time
 
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-``` r
 # Site Data for each region
 wv_station <- read.csv("Site Data/wv_station.csv")
 va_station <- read.csv("Site Data/va_station.csv")
@@ -234,17 +76,7 @@ wv_data <- wv_data |>
   filter(CharacteristicName=="Carbon") |> # Filtering out carbon data
   group_by(MonitoringLocationIdentifier, CharacteristicName, month, year) |>
   summarise(ResultMeasureValue=mean(ResultMeasureValue)) 
-```
 
-    Warning: There was 1 warning in `mutate()`.
-    ℹ In argument: `ResultMeasureValue = as.numeric(ResultMeasureValue)`.
-    Caused by warning:
-    ! NAs introduced by coercion
-
-    `summarise()` has grouped output by 'MonitoringLocationIdentifier',
-    'CharacteristicName', 'month'. You can override using the `.groups` argument.
-
-``` r
 va_data = select(va,6,7,24,25,30,31,40:43, 45) 
 va_data <- va_data |>
   mutate(ResultMeasureValue= as.numeric(ResultMeasureValue)) |>
@@ -254,12 +86,7 @@ va_data <- va_data |>
   filter(CharacteristicName=="Carbon") |>
   group_by(MonitoringLocationIdentifier, CharacteristicName, month, year) |>
   summarise(ResultMeasureValue=mean(ResultMeasureValue))
-```
 
-    `summarise()` has grouped output by 'MonitoringLocationIdentifier',
-    'CharacteristicName', 'month'. You can override using the `.groups` argument.
-
-``` r
 pa_data = select(pa,6,7,24,25,30,31,40:43, 45) #columns that we actually need
 pa_data <- pa_data |>
   mutate(ResultMeasureValue= as.numeric(ResultMeasureValue)) |>
@@ -269,12 +96,7 @@ pa_data <- pa_data |>
   filter(CharacteristicName=="Carbon") |>
   group_by(MonitoringLocationIdentifier, CharacteristicName, month, year) |>
   summarise(ResultMeasureValue=mean(ResultMeasureValue)) 
-```
 
-    `summarise()` has grouped output by 'MonitoringLocationIdentifier',
-    'CharacteristicName', 'month'. You can override using the `.groups` argument.
-
-``` r
 ny_data = select(ny,6,7,24,25,30,31,40:43, 45) #columns that we actually need
 ny_data <- ny_data |>
   mutate(ResultMeasureValue= as.numeric(ResultMeasureValue)) |>
@@ -284,12 +106,7 @@ ny_data <- ny_data |>
   filter(CharacteristicName=="Carbon") |>
   group_by(MonitoringLocationIdentifier, CharacteristicName, month, year) |>
   summarise(ResultMeasureValue=mean(ResultMeasureValue))
-```
 
-    `summarise()` has grouped output by 'MonitoringLocationIdentifier',
-    'CharacteristicName', 'month'. You can override using the `.groups` argument.
-
-``` r
 md_data = select(md,6,7,24,25,30,31,40:43, 45) #columns that we actually need
 md_data <- md_data |>
   mutate(ResultMeasureValue= as.numeric(ResultMeasureValue)) |>
@@ -299,17 +116,7 @@ md_data <- md_data |>
   filter(CharacteristicName=="Carbon") |>
   group_by(MonitoringLocationIdentifier, CharacteristicName, month, year) |>
   summarise(ResultMeasureValue=mean(ResultMeasureValue)) 
-```
 
-    Warning: There was 1 warning in `mutate()`.
-    ℹ In argument: `ResultMeasureValue = as.numeric(ResultMeasureValue)`.
-    Caused by warning:
-    ! NAs introduced by coercion
-
-    `summarise()` has grouped output by 'MonitoringLocationIdentifier',
-    'CharacteristicName', 'month'. You can override using the `.groups` argument.
-
-``` r
 de_data = select(de,6,7,24,25,30,31,40:43, 45) #columns that we actually need
 de_data <- de_data |>
   mutate(ResultMeasureValue= as.numeric(ResultMeasureValue)) |>
@@ -319,17 +126,7 @@ de_data <- de_data |>
   filter(CharacteristicName=="Carbon") |>
   group_by(MonitoringLocationIdentifier, CharacteristicName, month, year) |>
   summarise(ResultMeasureValue=mean(ResultMeasureValue)) 
-```
 
-    Warning: There was 1 warning in `mutate()`.
-    ℹ In argument: `ResultMeasureValue = as.numeric(ResultMeasureValue)`.
-    Caused by warning:
-    ! NAs introduced by coercion
-
-    `summarise()` has grouped output by 'MonitoringLocationIdentifier',
-    'CharacteristicName', 'month'. You can override using the `.groups` argument.
-
-``` r
 dc_data = select(dc,6,7,24,25,30,31,40:43, 45) #columns that we actually need
 dc_data <- dc_data |>
   mutate(ResultMeasureValue= as.numeric(ResultMeasureValue)) |>
@@ -339,12 +136,7 @@ dc_data <- dc_data |>
   filter(CharacteristicName=="Carbon") |>
   group_by(MonitoringLocationIdentifier, CharacteristicName, month, year) |>
   summarise(ResultMeasureValue=mean(ResultMeasureValue))
-```
 
-    `summarise()` has grouped output by 'MonitoringLocationIdentifier',
-    'CharacteristicName', 'month'. You can override using the `.groups` argument.
-
-``` r
 # Combining all the cleaned dataframes together
 all_data <- rbind(wv_data, va_data, pa_data, ny_data, md_data, de_data, dc_data)
 
@@ -370,11 +162,7 @@ df_final$CountyCode <- sprintf("%03d", as.numeric(df_final$CountyCode))
 # Combine StateCode and padded CountyCode into a new column (FIPS)
 df_final$fips <- paste0(df_final$StateCode, df_final$CountyCode)
 df_final$fips <- as.integer(df_final$fips)
-```
 
-    Warning: NAs introduced by coercion
-
-``` r
 # Reading fips codes
 fips_codes <- read.csv("fips-by-state.csv")
 
@@ -400,13 +188,7 @@ df_final3<- df_final2 |>
   mutate(tax=ifelse(is.na(tax), 0, tax)) |>
   group_by(month, year, name.x, state.x, ban, tax, month_ban, year_ban, month_tax, year_tax) |>
   summarize(Carbon=mean(ResultMeasureValue))
-```
 
-    `summarise()` has grouped output by 'month', 'year', 'name.x', 'state.x',
-    'ban', 'tax', 'month_ban', 'year_ban', 'month_tax'. You can override using the
-    `.groups` argument.
-
-``` r
 #county characteristics
 df_county<-df_final3 |>
   group_by(name.x, state.x, ban, tax, month_ban, year_ban, month_tax, year_tax) |>
@@ -479,12 +261,7 @@ combined_data2 <- combined_data %>%
 ban_date_hf <- unique(harford_data %>% 
                      summarise(year_ban = unique(year_ban), month_ban = unique(month_ban)) %>%
                      mutate(ban_date = as.Date(paste(year_ban, month_ban, "01", sep = "-"))))$ban_date
-```
 
-    `summarise()` has grouped output by 'month', 'year', 'name', 'state', 'ban',
-    'tax', 'month_ban', 'year_ban'. You can override using the `.groups` argument.
-
-``` r
 # Plot
 ggplot(combined_data2, aes(x = month, y = avg_carbon, color = location)) +
   geom_line() + # Line plot for both locations
@@ -502,15 +279,11 @@ ggplot(combined_data2, aes(x = month, y = avg_carbon, color = location)) +
   geom_smooth() 
 ```
 
-    `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
-
 ![](README_files/figure-commonmark/unnamed-chunk-2-1.png)
 
 ``` r
 ggsave("md.jpg", width = 1500, height = 700, units="px")
 ```
-
-    `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 
 ``` r
 ######################### Plot for Arlington and Virginia #########################
