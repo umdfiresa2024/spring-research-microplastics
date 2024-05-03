@@ -243,15 +243,6 @@ data. We also found that Arlington County in Virginia is the only county
 in Virginia that had a tax implemented before 2024 and had sufficient
 dissolved carbon data.
 
-The effects of the plastic bag ban on microplastic pollution in the
-Chesapeake Bay are unclear from our current results. We cannot conclude
-that the treatment variable, ban/tax, makes a significant impact on the
-outcome variable, average dissolved carbon levels. This is due to a lack
-of available data on counties that have implemented the ban or tax for
-long periods of time. We hope to look into a number of external factors
-in the future including storm water runoff and precipitation data that
-could play a role in the levels of dissolved carbon.
-
 These graphs display our results:
 
 ``` r
@@ -373,6 +364,17 @@ ggsave("va.jpg", width=1500, height=700, units="px")
 ```
 
     `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+
+## Conclusion
+
+The effects of the plastic bag ban on microplastic pollution in the
+Chesapeake Bay are unclear from our current results. We cannot conclude
+that the treatment variable, ban/tax, makes a significant impact on the
+outcome variable, average dissolved carbon levels. This is due to a lack
+of available data on counties that have implemented the ban or tax for
+long periods of time. We hope to look into a number of external factors
+in the future including storm water runoff and precipitation data that
+could play a role in the levels of dissolved carbon.
 
 ## References
 
