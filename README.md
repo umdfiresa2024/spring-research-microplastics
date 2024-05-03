@@ -12,22 +12,33 @@ the Chesapeake Bay?
 
 ## Background
 
-Plastic bag bans have been implemented all around the Chesapeake Bay
-area in the past decade. Harford County in Maryland implemented a
-plastic bag ban in September 2017. Arlington and Fairfax counties in
-Virginia implemented a plastic bag tax in January 2022.
+In light of the escalating concerns over rising microplastic
+concentrations in local watersheds, policymakers have been exploring
+interventions to safeguard water quality from plastic pollution.
+Notably, various jurisdictions around the Chesapeake Bay Watershed—an
+integral estuarine system serving the DMV (D.C., Maryland, and Virginia)
+and broader Northeastern United States(New York, Pennsylvania, Delaware,
+and West Virginia)—have implemented measures such as plastic bag bans
+and taxes. These measures aim to curtail the consumption and subsequent
+pollution of plastic bags through taxes and complete bans of plastic
+bags. For instance, Harford County in Maryland enacted a plastic bag ban
+in September 2017, while Arlington and Fairfax counties in Virginia
+introduced a plastic bag tax starting January 2022.
 
-Seeley et al. (2020) and Shen et al. (2020) discussed how microplastics
-can impact ocean carbon sequestration and dissolved organic carbon
-levels.
-
-Our research attempts to see what effects, if any, plastic bag bans and
-taxes have on dissolved carbon levels in the Chesapeake Bay.
+To critically evaluate the effectiveness of these policies and their
+environmental ramifications, our study monitors changes in oceanic
+carbon sequestration dynamics, specifically focusing on dissolved
+organic carbon levels as research suggests that microplastics can
+influence these levels by absorbing carbon particles when they degrade
+in aquatic environments. Thereby, our research aims to determine the
+impacts, if any, that plastic bag bans and taxes have on the dissolved
+carbon levels within the Chesapeake Bay ecosystem.
 
 ## Data
 
 The list of counties with plastic bag bans and taxes came from
-banthebag.com.
+banthebag.com, which also provides the dates of implementation of the
+regulations.
 
 The list of counties and states came from the Chesapeake Bay Foundation
 website, which listed the counties that are considered to be a part of
@@ -38,7 +49,12 @@ at the dissolved carbon levels in a date range from 1-1-2010 to 3-1-2024
 in the states/regions of New York, Pennsylvania, Maryland, Delaware, DC,
 Virginia, and West Virginia.
 
-Clean data here.
+We first calculated the average levels of dissolved carbon per location
+per month. Then we checked if the list of Chesapeake Bay counties
+implemented a bag ban or tax. Finally, we merged our regulation data
+with our water quality data and attempted to analyze any trends we saw.
+
+The code below shows how we cleaned our data:
 
 ``` r
 library('tidyverse')
@@ -67,6 +83,7 @@ dc_station <- read.csv("Site Data/dc_station.csv")
 
 ############################## Cleaning Carbon Data ###############################
 
+# West Virginia mean carbon levels
 wv_data = select(wv,6,7,24,25,30,31,40:43, 45) # keeping columns we need
 wv_data <- wv_data |>
   mutate(ResultMeasureValue= as.numeric(ResultMeasureValue)) |> # making ResultMeasureValue numeric
@@ -77,6 +94,7 @@ wv_data <- wv_data |>
   group_by(MonitoringLocationIdentifier, CharacteristicName, month, year) |>
   summarise(ResultMeasureValue=mean(ResultMeasureValue)) 
 
+# Virginia mean carbon levels
 va_data = select(va,6,7,24,25,30,31,40:43, 45) 
 va_data <- va_data |>
   mutate(ResultMeasureValue= as.numeric(ResultMeasureValue)) |>
@@ -87,6 +105,7 @@ va_data <- va_data |>
   group_by(MonitoringLocationIdentifier, CharacteristicName, month, year) |>
   summarise(ResultMeasureValue=mean(ResultMeasureValue))
 
+# Pennsylvania mean carbon levels
 pa_data = select(pa,6,7,24,25,30,31,40:43, 45) #columns that we actually need
 pa_data <- pa_data |>
   mutate(ResultMeasureValue= as.numeric(ResultMeasureValue)) |>
@@ -97,6 +116,7 @@ pa_data <- pa_data |>
   group_by(MonitoringLocationIdentifier, CharacteristicName, month, year) |>
   summarise(ResultMeasureValue=mean(ResultMeasureValue)) 
 
+# New York mean carbon levels
 ny_data = select(ny,6,7,24,25,30,31,40:43, 45) #columns that we actually need
 ny_data <- ny_data |>
   mutate(ResultMeasureValue= as.numeric(ResultMeasureValue)) |>
@@ -107,6 +127,7 @@ ny_data <- ny_data |>
   group_by(MonitoringLocationIdentifier, CharacteristicName, month, year) |>
   summarise(ResultMeasureValue=mean(ResultMeasureValue))
 
+# Maryland mean carbon levels
 md_data = select(md,6,7,24,25,30,31,40:43, 45) #columns that we actually need
 md_data <- md_data |>
   mutate(ResultMeasureValue= as.numeric(ResultMeasureValue)) |>
@@ -117,6 +138,7 @@ md_data <- md_data |>
   group_by(MonitoringLocationIdentifier, CharacteristicName, month, year) |>
   summarise(ResultMeasureValue=mean(ResultMeasureValue)) 
 
+# Delaware mean carbon levels
 de_data = select(de,6,7,24,25,30,31,40:43, 45) #columns that we actually need
 de_data <- de_data |>
   mutate(ResultMeasureValue= as.numeric(ResultMeasureValue)) |>
@@ -127,6 +149,7 @@ de_data <- de_data |>
   group_by(MonitoringLocationIdentifier, CharacteristicName, month, year) |>
   summarise(ResultMeasureValue=mean(ResultMeasureValue)) 
 
+# DC mean carbon levels
 dc_data = select(dc,6,7,24,25,30,31,40:43, 45) #columns that we actually need
 dc_data <- dc_data |>
   mutate(ResultMeasureValue= as.numeric(ResultMeasureValue)) |>
@@ -136,6 +159,7 @@ dc_data <- dc_data |>
   filter(CharacteristicName=="Carbon") |>
   group_by(MonitoringLocationIdentifier, CharacteristicName, month, year) |>
   summarise(ResultMeasureValue=mean(ResultMeasureValue))
+
 
 # Combining all the cleaned dataframes together
 all_data <- rbind(wv_data, va_data, pa_data, ny_data, md_data, de_data, dc_data)
@@ -209,10 +233,11 @@ df_final_carbon$date <- as.Date(with(df_final_carbon, paste(df_final_carbon$year
 
 ## Preliminary Results
 
-Use your final dataset to visualize how the treatment variable impacts
-the outcome variable here:
-
-We found that Harford County is the only county in Maryland that
+After observing all counties’ policy implementation dates, we noticed
+most location recently (2022-2024) implemented their bag bans or taxes.
+When gathering data, we defined sufficient dissolved carbon data as any
+location with over 100 observations over a continuous period of time. We
+found that Harford County is the only county in Maryland that
 implemented a Bag Ban before 2024 that had sufficient dissolved carbon
 data. We also found that Arlington County in Virginia is the only county
 in Virginia that had a tax implemented before 2024 and had sufficient
@@ -224,10 +249,10 @@ that the treatment variable, ban/tax, makes a significant impact on the
 outcome variable, average dissolved carbon levels. This is due to a lack
 of available data on counties that have implemented the ban or tax for
 long periods of time. We hope to look into a number of external factors
-in the future including stormwater runoff and precipitation data that
+in the future including storm water runoff and precipitation data that
 could play a role in the levels of dissolved carbon.
 
-These graphs are our results:
+These graphs display our results:
 
 ``` r
 ############################ Plot for Harford & Maryland ##########################
@@ -348,3 +373,13 @@ ggsave("va.jpg", width=1500, height=700, units="px")
 ```
 
     `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+
+## References
+
+Seeley, M. E., Song, B., Passie, R., & Hale, R. C. (2020). Microplastics
+affect sedimentary microbial communities and nitrogen cycling. Nature
+Communications, 11(1).
+
+Shen, M., Ye, S., Zeng, G., Zhang, Y., Xing, L., Tang, W., Wen, X., &
+Liu, S. (2020). Can microplastics pose a threat to ocean carbon
+sequestration? Marine Pollution Bulletin, 150, 110712.
