@@ -53,15 +53,7 @@ pa_station <- read.csv("Site Data/pa_station.csv")
 ny_station <- read.csv("Site Data/ny_station.csv")
 md_station <- read.csv("Site Data/md_station.csv")
 de_station <- read.csv("Site Data/de_station.csv")
-dc_station <- read.csv("Site Data/dc_station# Nitrogen data
-dc_n <- read_csv("US_WQ_Data/DC_nitro.zip")
-de_n <- read_csv("US_WQ_Data/DE_nitro.zip")
-md_n <- read_csv("US_WQ_Data/MD_nitro.zip")
-ny_n <- read_csv("US_WQ_Data/NY_nitro.zip")
-pa_n <- read_csv("US_WQ_Data/PA_nitro.zip")
-va_n <- read_csv("US_WQ_Data/VA_nitro.zip")
-wv_n <- read_csv("US_WQ_Data/WV_nitro.zip").
-csv")
+dc_station <- read.csv("Site Data/dc_station.csv")
 
 
 ############################## Cleaning Carbon Data ###############################
