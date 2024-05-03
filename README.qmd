@@ -193,11 +193,17 @@ df_county<-df_final3 |>
   group_by(name.x, state.x, ban, tax, month_ban, year_ban, month_tax, year_tax) |>
   tally() 
 
-# Our final Carbon dataframe: df_final3
+
 names(df_final3)[names(df_final3) == 'name.x'] <- 'name'
 names(df_final3)[names(df_final3) == 'state.x'] <- 'state'
 names(df_county)[names(df_county) == 'name.x'] <- 'name'
 names(df_county)[names(df_county) == 'state.x'] <- 'state'
+
+# Final carbon data frame
+df_final_carbon <- df_final3
+df_final_carbon$month <- sprintf("%02d", df_final_carbon$month) 
+df_final_carbon$date <- as.Date(with(df_final_carbon, paste(df_final_carbon$year, df_final_carbon$month, "01", sep = "-")), "%Y-%m-%d")
+
 
 ############################## Cleaning Nitrogen Data #############################
 df_f_n <- rbind(dc_n, de_n, md_n, ny_n, pa_n, va_n, wv_n)
